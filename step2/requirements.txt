@@ -1,0 +1,4 @@
+google-adk
+litellm
+uv
+google-adk[extensions]
