@@ -5,10 +5,12 @@ Under the hood, LLMs are just probability engines predicting the next piece of t
 ## 1. Tokens and Context
 
 **Tokens**
+
 LLMs don't read words or characters; they read **tokens**. It's just a piece of a string. One token is roughly 3/4 of an English word (or one syllable). 
 *   *Analogy:* The word `Hamburger` might be split into three tokens: `[Ham]`, `[bur]`, `[ger]`. When you pay an API provider, you are paying per token.
 
 **Context**
+
 LLMs are completely stateless. They have no memory. To have a "conversation," the framework (like OpenWebUI or ADK) sends the *entire chat history* to the model on every single request. 
 *   The **Context Window** (e.g., 128k tokens) is the maximum array size of tokens the model can process in a single request. If your chat history exceeds this, the framework must truncate or summarize older messages.
 
@@ -36,10 +38,13 @@ Penalties stop the model from looping or sounding robotic.
 ## 4. Agentic Mode & Native Function Calling
 
 **Native Function Calling**
+
 In the past, you had to write massive prompts for LLM to *"ALWAYS output valid JSON with keys X and Y. NEVER OUTPUT ANYTHING ELSE PLEASE I BEG YOU, YOU WILL DIE IF YOU'RE NOT GOING TO OUTPUT A JSON"* (This is actually what I was writing before discovering native function calling, I'm not kidding...)
+
 Modern models are fine-tuned to natively support functions. You pass a JSON Schema of your Python function to the API. If the model decides it needs that tool, it will natively halt text generation and output a perfectly formatted JSON payload matching your schema.
 
 **Agentic Mode**
+
 This is the loop around the LLM. When the LLM outputs a tool-call JSON payload, the framework (ADK/OpenWebUI) intercepts it, executes the local Python function, and feeds the result back to the LLM so it can summarize the answer for the user.
 
 ## 5. Reasoning Models
