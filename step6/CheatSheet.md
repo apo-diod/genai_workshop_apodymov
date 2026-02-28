@@ -17,10 +17,12 @@ LLMs are completely stateless. They have no memory. To have a "conversation," th
 When an LLM generates text, it assigns a probability score to every single token in its vocabulary.
 
 **Top K**
+
 Before picking a token, the model looks at the sorted array of probabilities. **Top K** means *"Only keep the top K most likely tokens, and disregard the rest."*
 *   This prevents the model from ever hallucinating completely absurd words.
 
-**Temperature (The Creativity Dial)**
+**Temperature**
+
 After slicing the array via Top K, **Temperature** controls the remaining probabilities.
 *   `Temperature = 0.0`: Acts like `max()`. It *always* picks the #1 most probable next token. It is deterministic.
 *   `Temperature = 0.8`: Introduces randomness, allowing the model to occasionally pick the 2nd or 3rd most likely token.
